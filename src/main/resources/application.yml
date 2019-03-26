@@ -1,5 +1,8 @@
 server:
   port: 5001
+  tomcat:
+      max-connections: 1200
+      max-threads: 1000
 
 region:
   datasource:
@@ -35,3 +38,13 @@ spring:
     port: 5672
     username: ARGO
     password: xq3askJWmegaewdkf;la3qdawef
+
+logging:
+  slf4j:
+    enabled: true
+  rabbitmq:
+    enabled: true
+    exchangeName: log
+    declareExchange: true
+  project:
+    application: argo-region-man
