@@ -10,7 +10,7 @@ region:
     username: root
     password: qwer223
     databaseName: argo-region-man
-    urlname: jdbc:mysql://192.168.1.34:3306/argo-region-man?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&&useSSL=false&&allowMultiQueries=true
+    urlname: jdbc:mysql://192.168.1.12:3306/argo-region-man?useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&&useSSL=false&&allowMultiQueries=true
     driver-class-name: com.mysql.jdbc.Driver
     initialSize: 20
     minIdle: 20
@@ -34,7 +34,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
   rabbitmq:
-    host: 192.168.1.34
+    host: 192.168.1.12
     port: 5672
     username: ARGO
     password: xq3askJWmegaewdkf;la3qdawef
