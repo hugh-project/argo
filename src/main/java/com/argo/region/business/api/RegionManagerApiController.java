@@ -1,9 +1,15 @@
 package com.argo.region.business.api;
 
+import com.argo.region.business.Service.RegionService;
+import com.argo.region.business.model.RegionReq;
+import com.argo.region.business.model.ResMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.regex.Pattern;
 
 /**
  * <ul>
@@ -19,9 +25,26 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class RegionManagerApiController implements RegionManagerApi {
-
+    @Autowired
+     private RegionService regionService;
     @Override
-    public ResponseEntity addRegion() {
-        return null;
+    public ResponseEntity<ResMessage> addRegion(RegionReq regionReq) {
+        //id格式12位数字
+        if(!Pattern.matches("^[0-9]{12}$",regionReq.getRegionId())){
+            return ResponseEntity.ok(new ResMessage(false,"regionId应该位12位纯数字"));
+        }
+        //id是否重复
+        if(regionService.checkRegion(regionReq.getRegionId())){
+            return ResponseEntity.ok(new ResMessage(false,"regionId已存在"));
+        }
+        //是否启用，贫困位0或1
+        if(!Pattern.matches("^[0-1]{0,1}$",regionReq.getIsActive().toString())){
+            return ResponseEntity.ok(new ResMessage(false,"isActive应为0或1"));
+        }
+        if(!Pattern.matches("^[0-1]{0,1}$",regionReq.getIsPoor().toString())){
+            return ResponseEntity.ok(new ResMessage(false,"isPoor应为0或1"));
+        }
+        //todo 数据校验
+        return regionService.addRegion(regionReq);
     }
 }

@@ -1,5 +1,7 @@
 package com.argo.region.business.api;
 
+import com.argo.region.business.model.RegionReq;
+import com.argo.region.business.model.ResMessage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
@@ -23,5 +25,5 @@ public interface RegionManagerApi {
 
     @ApiOperation(httpMethod = "POST" ,value = "添加区域", nickname = "addRegion", notes = "添加新的行政区域主数据")
     @RequestMapping(value = "/addRegion", produces = "application/json",  method = RequestMethod.POST)
-    ResponseEntity addRegion();
+    ResponseEntity<ResMessage> addRegion(RegionReq regionReq);
 }
